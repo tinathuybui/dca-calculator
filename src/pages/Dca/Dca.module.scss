@@ -1,0 +1,25 @@
+.dca {
+	display: grid;
+	gap: var(--dca-size-10);
+	grid-template-columns: 1fr 1fr;
+	align-content: center;
+	padding: 100px;
+	height: 100dvh;
+	// background-color: #020202fc;
+
+	&__container {
+		padding: 50px;
+		gap: var(--dca-size-10);
+		display: grid;
+		border-radius: 20px;
+		&_inputs {
+			display: flex;
+			// flex-direction: column;
+			gap: var(--dca-size-10);
+		}
+	}
+
+	@media only screen and (max-width: 600px) {
+		grid-template-columns: 1fr;
+	}
+}
