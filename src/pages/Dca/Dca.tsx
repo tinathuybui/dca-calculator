@@ -103,11 +103,12 @@ const Dca = () => {
 										variant="outlined"
 										type="number"
 										value={initialNoOfUnits}
-										onChange={(e) =>
+										onChange={(e) => {
+											const inputValue = e.target.value;
 											setInitialNoOfUnits(
-												Number(e.target.value)
-											)
-										}
+												parseFloat(inputValue)
+											);
+										}}
 									/>
 								</TableCell>
 								<TableCell>
@@ -154,11 +155,12 @@ const Dca = () => {
 										variant="outlined"
 										type="number"
 										value={currentSharePrice}
-										onChange={(e) =>
+										onChange={(e) => {
+											const inputValue = e.target.value;
 											setCurrentSharePrice(
-												Number(e.target.value)
-											)
-										}
+												parseFloat(inputValue)
+											);
+										}}
 									/>
 								</TableCell>
 								<TableCell>
@@ -180,11 +182,12 @@ const Dca = () => {
 										variant="outlined"
 										type="number"
 										value={amountYouWantToBuy}
-										onChange={(e) =>
+										onChange={(e) => {
+											const inputValue = e.target.value;
 											setAmountYouWantToBuy(
-												Number(e.target.value)
-											)
-										}
+												parseFloat(inputValue)
+											);
+										}}
 									/>
 								</TableCell>
 							</TableRow>
