@@ -1,3 +1,9 @@
+<div align="center">
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a1af803-8d31-46ae-9fa8-2c28bf63cd5b/deploy-status)](https://app.netlify.com/sites/dca-calc/deploys)
+
+</div>
+
 ## 1. Introduction
 
 Welcome to the Dollar Cost Averaging Calculator!
