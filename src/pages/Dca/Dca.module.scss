@@ -6,13 +6,6 @@
 	border-radius: 10px;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
-	.greenText {
-		color: green;
-	}
-
-	.redText {
-		color: red;
-	}
 	.section {
 		margin-bottom: 1.5rem;
 
@@ -29,7 +22,6 @@
 
 	.tableContainer {
 		border-radius: 10px;
-		overflow: hidden;
 		box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 		background-color: #fff;
 		margin-top: 1.5rem;
@@ -40,11 +32,8 @@
 		background: #dee2e6;
 		border-bottom: 1px solid #adb5bd;
 
-		th {
+		td {
 			font-weight: bold;
-			padding: 12px;
-			text-align: left;
-			color: #495057;
 		}
 	}
 
@@ -80,17 +69,6 @@
 	.MuiOutlinedInput-adornedEnd {
 		padding-right: 10px;
 	}
-
-	.resultTableCell {
-		font-weight: bold;
-
-		text-align: left;
-		padding: 12px;
-	}
-
-	.resultTypography {
-		font-size: 16px;
-	}
 }
 
 .divider {
@@ -103,4 +81,9 @@
 	background-color: #007bff;
 	height: 5px;
 	margin-top: 10px;
+}
+
+.resultPLIocn {
+	display: flex;
+	align-items: center;
 }
