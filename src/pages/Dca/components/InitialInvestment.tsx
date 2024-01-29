@@ -12,23 +12,53 @@ import {
 } from "@mui/material";
 import { Icon } from "components/General";
 import style from "pages/Dca/Dca.module.scss";
-import { Dispatch, FC, SetStateAction } from "react";
-import { textField } from "../Dca";
+import { ChangeEvent, Dispatch, FC, SetStateAction, useEffect } from "react";
+import { removeLeadingZeros } from "../utils";
 interface InitialInvestmentProps {
-	initialSharePrice: textField;
-	initialNoOfUnits: textField;
-	setInitialSharePrice: Dispatch<SetStateAction<textField>>;
-	setInitialNoOfUnits: Dispatch<SetStateAction<textField>>;
-	initialPurchaseAmount: textField;
+	initialSharePrice: number;
+	initialNoOfUnits: number;
+	initialPurchaseAmount: number;
+	setInitialSharePrice: Dispatch<SetStateAction<number>>;
+	setInitialNoOfUnits: Dispatch<SetStateAction<number>>;
+	setInitialPurchaseAmount: Dispatch<SetStateAction<number>>;
 }
 
 const InitialInvestment: FC<InitialInvestmentProps> = ({
 	initialSharePrice,
 	initialNoOfUnits,
+	initialPurchaseAmount,
 	setInitialSharePrice,
 	setInitialNoOfUnits,
-	initialPurchaseAmount,
+	setInitialPurchaseAmount,
 }) => {
+	const handleFocus = (event: { target: { select: () => void } }) => {
+		event.target.select();
+	};
+
+	useEffect(() => {
+		if (initialSharePrice && initialNoOfUnits)
+			setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
+	}, [initialSharePrice, initialNoOfUnits, setInitialPurchaseAmount]);
+
+	const handleSharePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const inputValue = parseFloat(e.target.value) || 0;
+		setInitialSharePrice(inputValue);
+	};
+
+	const handleNoOfUnitsChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const inputValue = parseFloat(e.target.value) || 0;
+		setInitialNoOfUnits(inputValue);
+	};
+
+	const handleInitialPurchaseAmountChange = (
+		e: ChangeEvent<HTMLInputElement>
+	) => {
+		const inputValue = removeLeadingZeros(e.target.value) || 0;
+		setInitialPurchaseAmount(inputValue);
+		if (initialNoOfUnits !== 0)
+			setInitialSharePrice(inputValue / initialNoOfUnits);
+	};
+
 	return (
 		<div className={style.section}>
 			<Typography variant="h5" align="left" gutterBottom>
@@ -52,41 +82,32 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 						<TableRow>
 							<TableCell>
 								<TextField
+									onFocus={handleFocus}
 									placeholder="0"
 									variant="outlined"
 									type="number"
 									value={initialSharePrice}
-									onChange={(e) => {
-										const inputValue = e.target.value;
-										setInitialSharePrice(
-											parseFloat(inputValue)
-										);
-									}}
+									onChange={handleSharePriceChange}
 								/>
 							</TableCell>
 							<TableCell>
 								<TextField
+									onFocus={handleFocus}
 									placeholder="0"
 									variant="outlined"
 									type="number"
 									value={initialNoOfUnits}
-									onChange={(e) => {
-										const inputValue = e.target.value;
-										setInitialNoOfUnits(
-											parseFloat(inputValue)
-										);
-									}}
+									onChange={handleNoOfUnitsChange}
 								/>
 							</TableCell>
 							<TableCell>
 								<TextField
+									onFocus={handleFocus}
 									placeholder="0"
 									variant="outlined"
 									type="number"
 									value={initialPurchaseAmount}
-									InputProps={{
-										readOnly: true,
-									}}
+									onChange={handleInitialPurchaseAmountChange}
 								/>
 							</TableCell>
 						</TableRow>

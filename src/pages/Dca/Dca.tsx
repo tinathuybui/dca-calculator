@@ -6,20 +6,14 @@ import InitialInvestment from "./components/InitialInvestment";
 import NewInvestment from "./components/NewInvestment";
 import Result from "./components/Result";
 
-export type textField = number | undefined;
-
 const Dca = () => {
-	const [initialSharePrice, setInitialSharePrice] =
-		useState<textField>(undefined);
-	const [initialNoOfUnits, setInitialNoOfUnits] =
-		useState<textField>(undefined);
-	const [currentSharePrice, setCurrentSharePrice] =
-		useState<textField>(undefined);
-	const [amountYouWantToBuy, setAmountYouWantToBuy] =
-		useState<textField>(undefined);
+	const [initialSharePrice, setInitialSharePrice] = useState<number>(0);
+	const [initialNoOfUnits, setInitialNoOfUnits] = useState<number>(0);
+	const [initialPurchaseAmount, setInitialPurchaseAmount] =
+		useState<number>(0);
 
-	const initialPurchaseAmount =
-		(initialSharePrice ?? 0) * (initialNoOfUnits ?? 0);
+	const [currentSharePrice, setCurrentSharePrice] = useState<number>(0);
+	const [amountYouWantToBuy, setAmountYouWantToBuy] = useState<number>(0);
 
 	return (
 		<div className={style.dca}>
@@ -28,9 +22,10 @@ const Dca = () => {
 			<InitialInvestment
 				initialSharePrice={initialSharePrice}
 				initialNoOfUnits={initialNoOfUnits}
+				initialPurchaseAmount={initialPurchaseAmount}
 				setInitialSharePrice={setInitialSharePrice}
 				setInitialNoOfUnits={setInitialNoOfUnits}
-				initialPurchaseAmount={initialPurchaseAmount}
+				setInitialPurchaseAmount={setInitialPurchaseAmount}
 			/>
 
 			<NewInvestment
@@ -41,11 +36,10 @@ const Dca = () => {
 			/>
 
 			<Result
-				currentSharePrice={currentSharePrice ?? 0}
-				initialNoOfUnits={initialNoOfUnits ?? 0}
-				amountYouWantToBuy={amountYouWantToBuy ?? 0}
-				initialPurchaseAmount={initialPurchaseAmount ?? 0}
-				initialSharePrice={initialSharePrice ?? 0}
+				currentSharePrice={currentSharePrice}
+				initialNoOfUnits={initialNoOfUnits}
+				amountYouWantToBuy={amountYouWantToBuy}
+				initialSharePrice={initialSharePrice}
 			/>
 
 			<Footer />

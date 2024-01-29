@@ -13,12 +13,11 @@ import {
 import { Icon } from "components/General";
 import style from "pages/Dca/Dca.module.scss";
 import { Dispatch, FC, SetStateAction } from "react";
-import { textField } from "../Dca";
 interface NewInvestmentProps {
-	currentSharePrice: textField;
-	setCurrentSharePrice: Dispatch<SetStateAction<textField>>;
-	amountYouWantToBuy: textField;
-	setAmountYouWantToBuy: Dispatch<SetStateAction<textField>>;
+	currentSharePrice: number;
+	setCurrentSharePrice: Dispatch<SetStateAction<number>>;
+	amountYouWantToBuy: number;
+	setAmountYouWantToBuy: Dispatch<SetStateAction<number>>;
 }
 
 const NewInvestment: FC<NewInvestmentProps> = ({
@@ -27,8 +26,11 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 	amountYouWantToBuy,
 	setAmountYouWantToBuy,
 }) => {
-	const additionalNoOfUnits =
-		(amountYouWantToBuy ?? 0) / (currentSharePrice ?? 0);
+	const additionalNoOfUnits = amountYouWantToBuy / currentSharePrice;
+
+	const handleFocus = (event: { target: { select: () => void } }) => {
+		event.target.select();
+	};
 
 	return (
 		<div className={style.section}>
@@ -53,6 +55,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 						<TableRow>
 							<TableCell>
 								<TextField
+									onFocus={handleFocus}
 									placeholder="0"
 									id="outlined-basic"
 									variant="outlined"
@@ -68,6 +71,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 							</TableCell>
 							<TableCell>
 								<TextField
+									onFocus={handleFocus}
 									placeholder="0"
 									id="outlined-basic"
 									variant="outlined"
@@ -80,6 +84,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 							</TableCell>
 							<TableCell>
 								<TextField
+									onFocus={handleFocus}
 									placeholder="0"
 									id="outlined-basic"
 									variant="outlined"

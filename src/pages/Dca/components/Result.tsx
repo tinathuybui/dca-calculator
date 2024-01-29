@@ -16,7 +16,6 @@ interface ResultProps {
 	currentSharePrice: number;
 	initialNoOfUnits: number;
 	amountYouWantToBuy: number;
-	initialPurchaseAmount: number;
 	initialSharePrice: number;
 }
 
@@ -24,9 +23,10 @@ const Result: FC<ResultProps> = ({
 	currentSharePrice,
 	initialNoOfUnits,
 	amountYouWantToBuy,
-	initialPurchaseAmount,
 	initialSharePrice,
 }) => {
+	const initialPurchaseAmount = initialSharePrice * initialNoOfUnits;
+
 	const numberOfUnits =
 		currentSharePrice &&
 		initialNoOfUnits + amountYouWantToBuy / currentSharePrice;
