@@ -18,14 +18,8 @@ const Dca = () => {
 	const [amountYouWantToBuy, setAmountYouWantToBuy] =
 		useState<textField>(undefined);
 
-	const iSharePrice = initialSharePrice ? initialSharePrice : 0;
-	const iNoOfUnits = initialNoOfUnits ? initialNoOfUnits : 0;
-	const aYouWantToBuy = amountYouWantToBuy ? amountYouWantToBuy : 0;
-	const cSharePrice = currentSharePrice ? currentSharePrice : 0;
-
-	const initialPurchaseAmount = iSharePrice * iNoOfUnits;
-
-	const additionalNoOfUnits = aYouWantToBuy / cSharePrice;
+	const initialPurchaseAmount =
+		(initialSharePrice ?? 0) * (initialNoOfUnits ?? 0);
 
 	return (
 		<div className={style.dca}>
@@ -42,17 +36,16 @@ const Dca = () => {
 			<NewInvestment
 				currentSharePrice={currentSharePrice}
 				setCurrentSharePrice={setCurrentSharePrice}
-				additionalNoOfUnits={additionalNoOfUnits}
 				amountYouWantToBuy={amountYouWantToBuy}
 				setAmountYouWantToBuy={setAmountYouWantToBuy}
 			/>
 
 			<Result
-				cSharePrice={cSharePrice}
-				iNoOfUnits={iNoOfUnits}
-				aYouWantToBuy={aYouWantToBuy}
-				initialPurchaseAmount={initialPurchaseAmount}
-				iSharePrice={iSharePrice}
+				currentSharePrice={currentSharePrice ?? 0}
+				initialNoOfUnits={initialNoOfUnits ?? 0}
+				amountYouWantToBuy={amountYouWantToBuy ?? 0}
+				initialPurchaseAmount={initialPurchaseAmount ?? 0}
+				initialSharePrice={initialSharePrice ?? 0}
 			/>
 
 			<Footer />

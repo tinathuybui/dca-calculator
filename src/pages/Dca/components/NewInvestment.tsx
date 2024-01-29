@@ -17,7 +17,6 @@ import { textField } from "../Dca";
 interface NewInvestmentProps {
 	currentSharePrice: textField;
 	setCurrentSharePrice: Dispatch<SetStateAction<textField>>;
-	additionalNoOfUnits: textField;
 	amountYouWantToBuy: textField;
 	setAmountYouWantToBuy: Dispatch<SetStateAction<textField>>;
 }
@@ -25,10 +24,12 @@ interface NewInvestmentProps {
 const NewInvestment: FC<NewInvestmentProps> = ({
 	currentSharePrice,
 	setCurrentSharePrice,
-	additionalNoOfUnits,
 	amountYouWantToBuy,
 	setAmountYouWantToBuy,
 }) => {
+	const additionalNoOfUnits =
+		(amountYouWantToBuy ?? 0) / (currentSharePrice ?? 0);
+
 	return (
 		<div className={style.section}>
 			<Typography variant="h5" align="left" gutterBottom>

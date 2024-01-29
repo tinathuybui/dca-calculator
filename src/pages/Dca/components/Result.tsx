@@ -13,39 +13,41 @@ import style from "pages/Dca/Dca.module.scss";
 import { FC } from "react";
 
 interface ResultProps {
-	cSharePrice: number;
-	iNoOfUnits: number;
-	aYouWantToBuy: number;
+	currentSharePrice: number;
+	initialNoOfUnits: number;
+	amountYouWantToBuy: number;
 	initialPurchaseAmount: number;
-	iSharePrice: number;
+	initialSharePrice: number;
 }
 
 const Result: FC<ResultProps> = ({
-	cSharePrice,
-	iNoOfUnits,
-	aYouWantToBuy,
+	currentSharePrice,
+	initialNoOfUnits,
+	amountYouWantToBuy,
 	initialPurchaseAmount,
-	iSharePrice,
+	initialSharePrice,
 }) => {
 	const numberOfUnits =
-		cSharePrice && iNoOfUnits + aYouWantToBuy / cSharePrice;
+		currentSharePrice &&
+		initialNoOfUnits + amountYouWantToBuy / currentSharePrice;
 
-	const totalCost = initialPurchaseAmount + aYouWantToBuy;
+	const totalCost = initialPurchaseAmount + amountYouWantToBuy;
 
 	const newSharePrice = numberOfUnits ? totalCost / numberOfUnits : 0;
 
-	const initialProfitLoss$ = cSharePrice * iNoOfUnits - initialPurchaseAmount;
+	const initialProfitLoss$ =
+		currentSharePrice * initialNoOfUnits - initialPurchaseAmount;
 
 	const initialProfitLosspercentage =
-		iSharePrice && (cSharePrice / iSharePrice) * 100 - 100;
+		initialSharePrice &&
+		(currentSharePrice / initialSharePrice) * 100 - 100;
 
 	const newProfitLoss$ = initialProfitLoss$;
 	const newProfitLosspercentage =
-		newSharePrice && ((cSharePrice - newSharePrice) / newSharePrice) * 100;
+		newSharePrice &&
+		((currentSharePrice - newSharePrice) / newSharePrice) * 100;
 
 	const color = initialProfitLosspercentage >= 0 ? "green" : "red";
-
-	console.log("newProfitLosspercentage", newProfitLosspercentage);
 
 	return (
 		<div className={style.section}>
