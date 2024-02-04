@@ -11,6 +11,7 @@ import {
 import { Icon } from "components/General";
 import style from "pages/Dca/Dca.module.scss";
 import { FC } from "react";
+import { formatNumberWithCommas } from "../utils";
 
 interface ResultProps {
 	currentSharePrice: number;
@@ -42,7 +43,7 @@ const Result: FC<ResultProps> = ({
 		initialSharePrice &&
 		(currentSharePrice / initialSharePrice) * 100 - 100;
 
-	const newProfitLoss$ = initialProfitLoss$;
+	const newProfitLoss = initialProfitLoss$;
 	const newProfitLosspercentage =
 		newSharePrice &&
 		((currentSharePrice - newSharePrice) / newSharePrice) * 100;
@@ -75,31 +76,42 @@ const Result: FC<ResultProps> = ({
 						<TableRow className={style.tableContainer}>
 							<TableCell>
 								<Typography>
-									{newSharePrice.toFixed(2)}
+									{formatNumberWithCommas(newSharePrice)}
 								</Typography>
 							</TableCell>
 							<TableCell>
 								<Typography>
-									{numberOfUnits.toFixed(2)}
+									{formatNumberWithCommas(numberOfUnits, {
+										style: undefined,
+										currency: undefined,
+									})}
 								</Typography>
 							</TableCell>
 							<TableCell>
-								<Typography>${totalCost.toFixed(2)}</Typography>
-							</TableCell>
-							<TableCell>
-								<Typography color={color}>
-									${newProfitLoss$.toFixed(2)}
+								<Typography>
+									{formatNumberWithCommas(totalCost)}
 								</Typography>
 							</TableCell>
 							<TableCell>
 								<Typography color={color}>
-									{initialProfitLosspercentage.toFixed(2)}%
+									{formatNumberWithCommas(newProfitLoss)}
+								</Typography>
+							</TableCell>
+							<TableCell>
+								<Typography color={color}>
+									{formatNumberWithCommas(
+										initialProfitLosspercentage,
+										{ style: "percent" }
+									)}
 								</Typography>
 							</TableCell>
 							<TableCell>
 								<div className={style.resultPLIocn}>
 									<Typography color={color}>
-										{newProfitLosspercentage.toFixed(2)}%
+										{formatNumberWithCommas(
+											newProfitLosspercentage,
+											{ style: "percent" }
+										)}
 									</Typography>
 									{!!initialProfitLosspercentage && (
 										<>

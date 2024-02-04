@@ -7,3 +7,13 @@ export function removeLeadingZeros(number: string) {
 
 	return result;
 }
+
+export function formatNumberWithCommas(number: number, override?: object) {
+	return new Intl.NumberFormat("en-US", {
+		style: "currency",
+		currency: "AUD",
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+		...override,
+	}).format(number);
+}
