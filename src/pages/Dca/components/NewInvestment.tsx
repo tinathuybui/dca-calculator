@@ -12,24 +12,68 @@ import {
 } from "@mui/material";
 import { Icon } from "components/General";
 import style from "pages/Dca/Dca.module.scss";
-import { Dispatch, FC, SetStateAction } from "react";
+import {
+	ChangeEvent,
+	Dispatch,
+	FC,
+	SetStateAction,
+	useEffect,
+	useState,
+} from "react";
 interface NewInvestmentProps {
 	currentSharePrice: number;
+	additionalInvestment: number;
 	setCurrentSharePrice: Dispatch<SetStateAction<number>>;
-	amountYouWantToBuy: number;
-	setAmountYouWantToBuy: Dispatch<SetStateAction<number>>;
+	setAdditionalInvestment: Dispatch<SetStateAction<number>>;
 }
 
 const NewInvestment: FC<NewInvestmentProps> = ({
 	currentSharePrice,
+	additionalInvestment,
 	setCurrentSharePrice,
-	amountYouWantToBuy,
-	setAmountYouWantToBuy,
+	setAdditionalInvestment,
 }) => {
-	const additionalNoOfUnits = amountYouWantToBuy / currentSharePrice;
+	const [isEditing, setIsEditing] = useState(false);
+	const [additionalNoOfUnits, setAdditionalNoOfUnits] = useState(0);
+
+	useEffect(() => {
+		if (!isEditing && currentSharePrice >= 0 && additionalNoOfUnits >= 0) {
+			setAdditionalInvestment(currentSharePrice * additionalNoOfUnits);
+		}
+
+		if (isEditing && currentSharePrice > 0) {
+			setAdditionalNoOfUnits(additionalInvestment / currentSharePrice);
+		}
+	}, [
+		isEditing,
+		currentSharePrice,
+		additionalNoOfUnits,
+		additionalInvestment,
+		setAdditionalInvestment,
+		setAdditionalNoOfUnits,
+		setCurrentSharePrice,
+	]);
 
 	const handleFocus = (event: { target: { select: () => void } }) => {
 		event.target.select();
+	};
+
+	const handleCurrentSharePrice = (e: ChangeEvent<HTMLInputElement>) => {
+		const inputValue = e.target.value;
+		setCurrentSharePrice(parseFloat(inputValue));
+		setIsEditing(false);
+	};
+
+	const handleAdditionalNoOfUnits = (e: ChangeEvent<HTMLInputElement>) => {
+		const inputValue = parseFloat(e.target.value);
+		setAdditionalNoOfUnits(inputValue);
+		setIsEditing(false);
+	};
+
+	const handleAdditionalInvestment = (e: ChangeEvent<HTMLInputElement>) => {
+		const inputValue = e.target.value;
+		setAdditionalInvestment(parseFloat(inputValue));
+		setIsEditing(true);
 	};
 
 	return (
@@ -61,12 +105,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 									variant="outlined"
 									type="number"
 									value={currentSharePrice}
-									onChange={(e) => {
-										const inputValue = e.target.value;
-										setCurrentSharePrice(
-											parseFloat(inputValue)
-										);
-									}}
+									onChange={handleCurrentSharePrice}
 								/>
 							</TableCell>
 							<TableCell>
@@ -77,9 +116,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 									variant="outlined"
 									type="number"
 									value={additionalNoOfUnits}
-									InputProps={{
-										readOnly: true,
-									}}
+									onChange={handleAdditionalNoOfUnits}
 								/>
 							</TableCell>
 							<TableCell>
@@ -89,13 +126,8 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 									id="outlined-basic"
 									variant="outlined"
 									type="number"
-									value={amountYouWantToBuy}
-									onChange={(e) => {
-										const inputValue = e.target.value;
-										setAmountYouWantToBuy(
-											parseFloat(inputValue)
-										);
-									}}
+									value={additionalInvestment}
+									onChange={handleAdditionalInvestment}
 								/>
 							</TableCell>
 						</TableRow>

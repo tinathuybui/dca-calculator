@@ -12,15 +12,16 @@ import {
 } from "@mui/material";
 import { Icon } from "components/General";
 import style from "pages/Dca/Dca.module.scss";
-import { ChangeEvent, Dispatch, FC, SetStateAction, useEffect } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import { removeLeadingZeros } from "../utils";
+
 interface InitialInvestmentProps {
 	initialSharePrice: number;
 	initialNoOfUnits: number;
 	initialPurchaseAmount: number;
-	setInitialSharePrice: Dispatch<SetStateAction<number>>;
-	setInitialNoOfUnits: Dispatch<SetStateAction<number>>;
-	setInitialPurchaseAmount: Dispatch<SetStateAction<number>>;
+	setInitialSharePrice: (value: React.SetStateAction<number>) => void;
+	setInitialNoOfUnits: (value: React.SetStateAction<number>) => void;
+	setInitialPurchaseAmount: (value: React.SetStateAction<number>) => void;
 }
 
 const InitialInvestment: FC<InitialInvestmentProps> = ({
@@ -35,28 +36,45 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 		event.target.select();
 	};
 
+	const [isEditing, setIsEditing] = useState(false);
+
 	useEffect(() => {
-		if (initialSharePrice && initialNoOfUnits)
+		if (!isEditing && initialSharePrice >= 0 && initialNoOfUnits >= 0) {
 			setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
-	}, [initialSharePrice, initialNoOfUnits, setInitialPurchaseAmount]);
+		}
+
+		if (isEditing) {
+			setInitialSharePrice(0);
+			setInitialNoOfUnits(0);
+		}
+	}, [
+		isEditing,
+		initialSharePrice,
+		initialNoOfUnits,
+		initialPurchaseAmount,
+		setInitialPurchaseAmount,
+		setInitialSharePrice,
+		setInitialNoOfUnits,
+	]);
 
 	const handleSharePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const inputValue = parseFloat(e.target.value) || 0;
+		const inputValue = parseFloat(e.target.value);
 		setInitialSharePrice(inputValue);
+		setIsEditing(false);
 	};
 
 	const handleNoOfUnitsChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const inputValue = parseFloat(e.target.value) || 0;
+		const inputValue = parseFloat(e.target.value);
 		setInitialNoOfUnits(inputValue);
+		setIsEditing(false);
 	};
 
 	const handleInitialPurchaseAmountChange = (
 		e: ChangeEvent<HTMLInputElement>
 	) => {
-		const inputValue = removeLeadingZeros(e.target.value) || 0;
+		const inputValue = removeLeadingZeros(e.target.value);
 		setInitialPurchaseAmount(inputValue);
-		if (initialNoOfUnits !== 0)
-			setInitialSharePrice(inputValue / initialNoOfUnits);
+		setIsEditing(true);
 	};
 
 	return (

@@ -13,7 +13,7 @@ const Dca = () => {
 		useState<number>(0);
 
 	const [currentSharePrice, setCurrentSharePrice] = useState<number>(0);
-	const [amountYouWantToBuy, setAmountYouWantToBuy] = useState<number>(0);
+	const [additionalInvestment, setAdditionalInvestment] = useState<number>(0);
 
 	return (
 		<div className={style.dca}>
@@ -31,14 +31,14 @@ const Dca = () => {
 			<NewInvestment
 				currentSharePrice={currentSharePrice}
 				setCurrentSharePrice={setCurrentSharePrice}
-				amountYouWantToBuy={amountYouWantToBuy}
-				setAmountYouWantToBuy={setAmountYouWantToBuy}
+				additionalInvestment={additionalInvestment}
+				setAdditionalInvestment={setAdditionalInvestment}
 			/>
 
 			<Result
 				currentSharePrice={currentSharePrice}
 				initialNoOfUnits={initialNoOfUnits}
-				amountYouWantToBuy={amountYouWantToBuy}
+				amountYouWantToBuy={additionalInvestment}
 				initialSharePrice={initialSharePrice}
 			/>
 
