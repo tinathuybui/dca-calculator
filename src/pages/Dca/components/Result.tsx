@@ -41,12 +41,11 @@ const Result: FC<ResultProps> = ({
 
 	const initialProfitLosspercentage =
 		initialSharePrice &&
-		(currentSharePrice / initialSharePrice) * 100 - 100;
+		(currentSharePrice - initialSharePrice) / initialSharePrice;
 
 	const newProfitLoss = initialProfitLoss$;
 	const newProfitLosspercentage =
-		newSharePrice &&
-		((currentSharePrice - newSharePrice) / newSharePrice) * 100;
+		newSharePrice && (currentSharePrice - newSharePrice) / newSharePrice;
 
 	const color = initialProfitLosspercentage >= 0 ? "green" : "red";
 

@@ -1,3 +1,4 @@
+// Routes.tsx
 import { CircularProgress } from "@mui/material";
 import { routes } from "data/routeData";
 import { FC, Suspense } from "react";

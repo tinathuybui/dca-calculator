@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import style from "./Dca.module.scss";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -41,7 +42,6 @@ const Dca = () => {
 				amountYouWantToBuy={additionalInvestment}
 				initialSharePrice={initialSharePrice}
 			/>
-
 			<Footer />
 		</div>
 	);

@@ -1,7 +1,7 @@
-import { Dca, PageNotFound } from "pages";
+import { Dca, DCAInstructions, PageNotFound } from "pages";
 import { FC } from "react";
 
-export type RouteId = "/" | "pagea" | "pageb" | "pagenotfound";
+export type RouteId = "dca" | "dca-instruction" | "pagenotfound";
 
 interface Route {
 	path: string;
@@ -11,14 +11,14 @@ interface Route {
 
 export const routes: Route[] = [
 	{
-		id: "/",
+		id: "dca",
 		path: "/",
 		component: Dca,
 	},
 	{
-		id: "pagea",
-		path: "/pagea",
-		component: Dca,
+		id: "dca-instruction",
+		path: "/dca-instruction",
+		component: DCAInstructions,
 	},
 	{
 		id: "pagenotfound",
