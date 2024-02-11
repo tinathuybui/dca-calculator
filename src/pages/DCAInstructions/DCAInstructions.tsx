@@ -1,13 +1,19 @@
 import { Typography } from "@mui/material";
-
 import { FC } from "react";
+import style from "./DCAInstructions.module.scss";
+
+const Header: FC = () => {
+	return (
+		<Typography variant="h4" align="center" gutterBottom>
+			Instructions
+		</Typography>
+	);
+};
 
 const DCAInstructions: FC = () => {
 	return (
-		<div>
-			<Typography variant="h5" gutterBottom>
-				Dollar-Cost Averaging (DCA) Calculator Instructions
-			</Typography>
+		<div className={style.ins}>
+			<Header />
 
 			<Typography variant="body1" paragraph>
 				<strong>1. Initial Input:</strong>

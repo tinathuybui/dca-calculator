@@ -78,7 +78,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 
 	return (
 		<div className={style.section}>
-			<Typography variant="h5" align="left" gutterBottom>
+			<Typography variant="h6" align="left" gutterBottom>
 				<IconButton color="primary" aria-label="new-investment">
 					<Icon name="TrendingUp" />
 				</IconButton>

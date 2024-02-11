@@ -3,7 +3,7 @@ import { FC } from "react";
 
 const Header: FC = () => {
 	return (
-		<Typography variant="h3" align="center" gutterBottom>
+		<Typography variant="h4" align="center" gutterBottom>
 			Dollar Cost Average Calculator
 		</Typography>
 	);

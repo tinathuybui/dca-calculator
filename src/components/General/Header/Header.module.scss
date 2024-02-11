@@ -1,0 +1,17 @@
+.header {
+	position: sticky;
+	background-color: #37474f;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+
+	&_items {
+		display: flex;
+		gap: 10px;
+		color: whitesmoke;
+
+		button {
+			color: whitesmoke;
+		}
+	}
+}

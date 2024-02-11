@@ -87,3 +87,39 @@
 	display: flex;
 	align-items: center;
 }
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes typingAnimation {
+	0% {
+		content: "🐱 Typing...";
+	}
+	25% {
+		content: "🐱 T";
+	}
+	50% {
+		content: "🐱 Ty";
+	}
+	75% {
+		content: "🐱 Typ";
+	}
+	100% {
+		content: "🐱 Typing...";
+	}
+}
+
+.catTypingAnimation::before {
+	content: "🐱 Typing...";
+	font-size: 2rem;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	animation: typingAnimation 2s infinite;
+}

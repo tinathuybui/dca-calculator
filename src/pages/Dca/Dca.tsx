@@ -17,7 +17,7 @@ const Dca = () => {
 	const [additionalInvestment, setAdditionalInvestment] = useState<number>(0);
 
 	return (
-		<div className={style.dca}>
+		<div className={`${style.dca} ${style.catTypingAnimation}`}>
 			<Header />
 
 			<InitialInvestment
