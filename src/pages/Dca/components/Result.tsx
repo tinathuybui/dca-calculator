@@ -48,6 +48,15 @@ const Result: FC<ResultProps> = ({
 		newSharePrice && (currentSharePrice - newSharePrice) / newSharePrice;
 
 	const color = initialProfitLosspercentage >= 0 ? "green" : "red";
+	const profitOrLoss = newProfitLoss >= 0 ? "profit" : "loss";
+
+	const conclusion = `If you were sell the share at the current price of ${formatNumberWithCommas(
+		currentSharePrice
+	)},
+	you would receive a total amount of ${formatNumberWithCommas(
+		totalCost + newProfitLoss
+	)}, resulting in a ${profitOrLoss} of
+	${formatNumberWithCommas(Math.abs(newProfitLoss))}.`;
 
 	return (
 		<div className={style.section}>
@@ -136,6 +145,13 @@ const Result: FC<ResultProps> = ({
 					</TableBody>
 				</Table>
 			</TableContainer>
+			{conclusion && (
+				<div className={style.conclusion}>
+					<Typography variant="body1" align="center">
+						{conclusion}
+					</Typography>
+				</div>
+			)}
 		</div>
 	);
 };
