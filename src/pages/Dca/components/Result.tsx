@@ -55,7 +55,7 @@ const Result: FC<ResultProps> = ({
 	)},
 	you would receive a total amount of ${formatNumberWithCommas(
 		totalCost + newProfitLoss
-	)}, resulting in a ${profitOrLoss} of
+	)}; resulting in a ${profitOrLoss} of
 	${formatNumberWithCommas(Math.abs(newProfitLoss))}.`;
 
 	return (
