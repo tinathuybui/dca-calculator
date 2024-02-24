@@ -25,6 +25,8 @@ interface NewInvestmentProps {
 	additionalInvestment: number;
 	setCurrentSharePrice: Dispatch<SetStateAction<number>>;
 	setAdditionalInvestment: Dispatch<SetStateAction<number>>;
+	additionalNoOfUnits: number;
+	setAdditionalNoOfUnits: Dispatch<SetStateAction<number>>;
 }
 
 const NewInvestment: FC<NewInvestmentProps> = ({
@@ -65,8 +67,8 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 	};
 
 	const handleAdditionalNoOfUnits = (e: ChangeEvent<HTMLInputElement>) => {
-		const inputValue = parseFloat(e.target.value);
-		setAdditionalNoOfUnits(inputValue);
+		const inputValue = e.target.value;
+		setAdditionalNoOfUnits(parseFloat(inputValue));
 		setIsEditing(false);
 	};
 

@@ -4,7 +4,7 @@ import style from "./DCAInstructions.module.scss";
 
 const Header: FC = () => {
 	return (
-		<Typography variant="h4" align="center" gutterBottom>
+		<Typography variant="h4" align="left" gutterBottom>
 			Instructions
 		</Typography>
 	);

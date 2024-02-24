@@ -8,22 +8,11 @@
 
 	.section {
 		margin-bottom: 1.5rem;
-
-		.MuiTypography-root {
-			display: flex;
-			align-items: center;
-			color: #007bff;
-
-			.MuiIconButton-root {
-				margin-right: 0.5rem;
-			}
-		}
 	}
 
 	.tableContainer {
 		border-radius: 10px;
 		box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-		background-color: #fff;
 		margin-top: 1.5rem;
 		overflow: scroll;
 	}
@@ -69,26 +58,27 @@
 	.MuiOutlinedInput-adornedEnd {
 		padding-right: 10px;
 	}
-}
 
-.divider {
-	margin: 20px 0;
-	border-width: 1px;
-	border-color: #ced4da;
-}
+	.divider {
+		margin: 20px 0;
+		border-width: 1px;
+		border-color: #ced4da;
+	}
 
-.resultDivider {
-	background-color: #007bff;
-	height: 5px;
-	margin-top: 10px;
-}
+	.resultDivider {
+		background-color: #007bff;
+		height: 5px;
+		margin-top: 10px;
+	}
 
-.resultPLIocn {
-	display: flex;
-	align-items: center;
-}
-.conclusion {
-	margin-top: 20px;
-	color: #333;
-	font-style: italic;
+	.resultPLIocn {
+		display: flex;
+		align-items: center;
+	}
+
+	.conclusion {
+		margin-top: 20px;
+		color: #333;
+		font-style: italic;
+	}
 }

@@ -79,7 +79,7 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 
 	return (
 		<div className={style.section}>
-			<Typography variant="h6" align="left" gutterBottom>
+			<Typography variant="h5" align="left" gutterBottom>
 				<IconButton color="primary" aria-label="initial-investment">
 					<Icon name="CircleDollarSign" />
 				</IconButton>

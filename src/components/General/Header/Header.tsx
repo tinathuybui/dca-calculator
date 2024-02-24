@@ -1,3 +1,4 @@
+import CalculateIcon from "@mui/icons-material/Calculate";
 import { Button, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +24,12 @@ const Header: React.FC = () => {
 
 	return (
 		<div className={style.header}>
-			<Typography variant="h6" sx={{ color: "#ffffff" }}>
-				Dollar Cost Average Calculator
+			<Typography
+				variant="h6"
+				sx={{ color: "#1976D2", display: "flex", alignItems: "center" }}
+			>
+				<CalculateIcon sx={{ mr: 1 }} />
+				DCA Calculator
 			</Typography>
 			<div className={style.header_items}>
 				{ITEMS.map((item) => (
@@ -32,6 +37,14 @@ const Header: React.FC = () => {
 						key={item.key}
 						onClick={() => onClick(item.linkto)}
 						variant="outlined"
+						sx={{
+							color:
+								item.label === "Dca" ||
+								item.label === "Instructions"
+									? "#2196F3"
+									: "#37474f",
+							borderColor: "#ccc",
+						}}
 					>
 						{item.label}
 					</Button>
