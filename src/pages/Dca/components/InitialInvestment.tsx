@@ -36,16 +36,26 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 		event.target.select();
 	};
 
-	const [isEditing, setIsEditing] = useState(false);
+	const [isEditing, setIsEditing] = useState({
+		initialSharePrice: false,
+		initialNoOfUnits: false,
+		initialPurchaseAmount: false,
+	});
 
 	useEffect(() => {
-		if (!isEditing && initialSharePrice >= 0 && initialNoOfUnits >= 0) {
+		console.log(isEditing);
+		if (isEditing.initialSharePrice) {
 			setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
-		}
-
-		if (isEditing) {
-			setInitialSharePrice(0);
-			setInitialNoOfUnits(0);
+		} else if (isEditing.initialNoOfUnits) {
+			if (initialPurchaseAmount > 0 && isEditing.initialPurchaseAmount) {
+				setInitialSharePrice(initialPurchaseAmount / initialNoOfUnits);
+			} else if (initialSharePrice > 0) {
+				setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
+			}
+		} else if (isEditing.initialPurchaseAmount) {
+			if (initialNoOfUnits > 0) {
+				setInitialSharePrice(initialPurchaseAmount / initialNoOfUnits);
+			}
 		}
 	}, [
 		isEditing,
@@ -60,13 +70,21 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 	const handleSharePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const inputValue = parseFloat(e.target.value);
 		setInitialSharePrice(inputValue);
-		setIsEditing(false);
+		setIsEditing({
+			initialSharePrice: true,
+			initialNoOfUnits: false,
+			initialPurchaseAmount: false,
+		});
 	};
 
 	const handleNoOfUnitsChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const inputValue = parseFloat(e.target.value);
 		setInitialNoOfUnits(inputValue);
-		setIsEditing(false);
+		setIsEditing({
+			initialSharePrice: false,
+			initialNoOfUnits: true,
+			initialPurchaseAmount: false,
+		});
 	};
 
 	const handleInitialPurchaseAmountChange = (
@@ -74,7 +92,11 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 	) => {
 		const inputValue = removeLeadingZeros(e.target.value);
 		setInitialPurchaseAmount(inputValue);
-		setIsEditing(true);
+		setIsEditing({
+			initialSharePrice: false,
+			initialNoOfUnits: false,
+			initialPurchaseAmount: true,
+		});
 	};
 
 	return (

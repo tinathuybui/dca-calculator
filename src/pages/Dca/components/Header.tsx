@@ -1,11 +1,25 @@
-import { Typography } from "@mui/material";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import { Button, Typography } from "@mui/material";
 import { FC } from "react";
+import style from "./Header.module.scss";
 
-const Header: FC = () => {
+interface HeaderProps {
+	handleReset: () => void;
+}
+
+const Header: FC<HeaderProps> = ({ handleReset }) => {
 	return (
-		<Typography variant="h4" align="left" gutterBottom>
-			Dollar Cost Average Calculator
-		</Typography>
+		<div className={style.header}>
+			<Typography variant="h4" align="left" gutterBottom>
+				Dollar Cost Average Calculator
+			</Typography>
+
+			<div>
+				<Button onClick={handleReset}>
+					<RefreshIcon />
+				</Button>
+			</div>
+		</div>
 	);
 };
 

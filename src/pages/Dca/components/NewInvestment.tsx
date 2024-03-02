@@ -34,9 +34,10 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 	additionalInvestment,
 	setCurrentSharePrice,
 	setAdditionalInvestment,
+	additionalNoOfUnits,
+	setAdditionalNoOfUnits,
 }) => {
 	const [isEditing, setIsEditing] = useState(false);
-	const [additionalNoOfUnits, setAdditionalNoOfUnits] = useState(0);
 
 	useEffect(() => {
 		if (!isEditing && currentSharePrice >= 0 && additionalNoOfUnits >= 0) {
