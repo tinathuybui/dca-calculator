@@ -47,7 +47,7 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 		if (isEditing.initialSharePrice) {
 			setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
 		} else if (isEditing.initialNoOfUnits) {
-			if (initialPurchaseAmount > 0 && isEditing.initialPurchaseAmount) {
+			if (initialPurchaseAmount > 0) {
 				setInitialSharePrice(initialPurchaseAmount / initialNoOfUnits);
 			} else if (initialSharePrice > 0) {
 				setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
