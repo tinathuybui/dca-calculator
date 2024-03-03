@@ -45,12 +45,24 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 		initialPurchaseAmount: false,
 	});
 
+	const [isInitialSharePriceFirstEdit, setIsInitialSharePriceFirstEdit] =
+		useState(false);
+
 	useEffect(() => {
 		console.log(isEditing);
 		if (isEditing.initialSharePrice) {
-			setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
+			const res = initialSharePrice * initialNoOfUnits;
+			setInitialPurchaseAmount(res);
+			if (initialNoOfUnits === 0 && initialPurchaseAmount === 0) {
+				setIsInitialSharePriceFirstEdit(true);
+			}
+			updateParamsValue(PARAMS.initialPurchaseAmount, res.toString());
 		} else if (isEditing.initialNoOfUnits) {
-			if (initialPurchaseAmount > 0) {
+			if (initialPurchaseAmount === 0) {
+				setIsInitialSharePriceFirstEdit(true);
+			}
+
+			if (initialPurchaseAmount > 0 && !isInitialSharePriceFirstEdit) {
 				const res = initialPurchaseAmount / initialNoOfUnits;
 				setInitialSharePrice(res);
 				updateParamsValue(PARAMS.initialSharePrice, res.toString());
@@ -75,6 +87,7 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 		setInitialSharePrice,
 		setInitialNoOfUnits,
 		updateParamsValue,
+		isInitialSharePriceFirstEdit,
 	]);
 
 	const handleSharePriceChange = (e: ChangeEvent<HTMLInputElement>) => {

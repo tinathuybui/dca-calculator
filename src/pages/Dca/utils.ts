@@ -10,8 +10,8 @@ export function formatNumberWithCommas(number: number, override?: object) {
 	return new Intl.NumberFormat("en-US", {
 		style: "currency",
 		currency: "AUD",
-		minimumFractionDigits: 2,
-		maximumFractionDigits: 2,
+		minimumFractionDigits: 6,
+		maximumFractionDigits: 6,
 		...override,
 	}).format(number);
 }
