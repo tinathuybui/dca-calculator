@@ -1,23 +1,34 @@
 import { useState } from "react";
 
+import { useParamsValue } from "hooks";
 import style from "./Dca.module.scss";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import InitialInvestment from "./components/InitialInvestment";
 import NewInvestment from "./components/NewInvestment";
 import Result from "./components/Result";
+import { PARAMS } from "./constants";
 
 const initialDefault = 0;
 
 const Dca = () => {
 	// const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-	const [initialSharePrice, setInitialSharePrice] =
-		useState<number>(initialDefault);
-	const [initialNoOfUnits, setInitialNoOfUnits] =
-		useState<number>(initialDefault);
-	const [initialPurchaseAmount, setInitialPurchaseAmount] =
-		useState<number>(initialDefault);
+	const { searchParams, updateParamsValue } = useParamsValue({
+		[PARAMS.initialSharePrice]: String(initialDefault),
+		[PARAMS.initialNoOfUnits]: String(initialDefault),
+		[PARAMS.initialPurchaseAmount]: String(initialDefault),
+	});
+
+	const [initialSharePrice, setInitialSharePrice] = useState<number>(
+		Number(searchParams.get(PARAMS.initialSharePrice)) || initialDefault
+	);
+	const [initialNoOfUnits, setInitialNoOfUnits] = useState<number>(
+		Number(searchParams.get(PARAMS.initialNoOfUnits)) || initialDefault
+	);
+	const [initialPurchaseAmount, setInitialPurchaseAmount] = useState<number>(
+		Number(searchParams.get(PARAMS.initialPurchaseAmount)) || initialDefault
+	);
 
 	const [currentSharePrice, setCurrentSharePrice] =
 		useState<number>(initialDefault);
@@ -46,6 +57,7 @@ const Dca = () => {
 				setInitialSharePrice={setInitialSharePrice}
 				setInitialNoOfUnits={setInitialNoOfUnits}
 				setInitialPurchaseAmount={setInitialPurchaseAmount}
+				updateParamsValue={updateParamsValue}
 			/>
 
 			<NewInvestment

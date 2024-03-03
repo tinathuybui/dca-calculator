@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Icon } from "components/General";
 import style from "pages/Dca/Dca.module.scss";
+import { PARAMS } from "pages/Dca/constants";
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import { removeLeadingZeros } from "../utils";
 
@@ -22,6 +23,7 @@ interface InitialInvestmentProps {
 	setInitialSharePrice: (value: React.SetStateAction<number>) => void;
 	setInitialNoOfUnits: (value: React.SetStateAction<number>) => void;
 	setInitialPurchaseAmount: (value: React.SetStateAction<number>) => void;
+	updateParamsValue: (key: string, value: string) => void;
 }
 
 const InitialInvestment: FC<InitialInvestmentProps> = ({
@@ -31,6 +33,7 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 	setInitialSharePrice,
 	setInitialNoOfUnits,
 	setInitialPurchaseAmount,
+	updateParamsValue,
 }) => {
 	const handleFocus = (event: { target: { select: () => void } }) => {
 		event.target.select();
@@ -48,13 +51,19 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 			setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
 		} else if (isEditing.initialNoOfUnits) {
 			if (initialPurchaseAmount > 0) {
-				setInitialSharePrice(initialPurchaseAmount / initialNoOfUnits);
+				const res = initialPurchaseAmount / initialNoOfUnits;
+				setInitialSharePrice(res);
+				updateParamsValue(PARAMS.initialSharePrice, res.toString());
 			} else if (initialSharePrice > 0) {
-				setInitialPurchaseAmount(initialSharePrice * initialNoOfUnits);
+				const res = initialSharePrice * initialNoOfUnits;
+				setInitialPurchaseAmount(res);
+				updateParamsValue(PARAMS.initialPurchaseAmount, res.toString());
 			}
 		} else if (isEditing.initialPurchaseAmount) {
 			if (initialNoOfUnits > 0) {
-				setInitialSharePrice(initialPurchaseAmount / initialNoOfUnits);
+				const res = initialPurchaseAmount / initialNoOfUnits;
+				setInitialSharePrice(res);
+				updateParamsValue(PARAMS.initialSharePrice, res.toString());
 			}
 		}
 	}, [
@@ -65,11 +74,13 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 		setInitialPurchaseAmount,
 		setInitialSharePrice,
 		setInitialNoOfUnits,
+		updateParamsValue,
 	]);
 
 	const handleSharePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const inputValue = parseFloat(e.target.value);
 		setInitialSharePrice(inputValue);
+		updateParamsValue(PARAMS.initialSharePrice, inputValue.toString());
 		setIsEditing({
 			initialSharePrice: true,
 			initialNoOfUnits: false,
@@ -80,6 +91,7 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 	const handleNoOfUnitsChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const inputValue = parseFloat(e.target.value);
 		setInitialNoOfUnits(inputValue);
+		updateParamsValue(PARAMS.initialNoOfUnits, inputValue.toString());
 		setIsEditing({
 			initialSharePrice: false,
 			initialNoOfUnits: true,
@@ -92,6 +104,7 @@ const InitialInvestment: FC<InitialInvestmentProps> = ({
 	) => {
 		const inputValue = removeLeadingZeros(e.target.value);
 		setInitialPurchaseAmount(inputValue);
+		updateParamsValue(PARAMS.initialPurchaseAmount, inputValue.toString());
 		setIsEditing({
 			initialSharePrice: false,
 			initialNoOfUnits: false,

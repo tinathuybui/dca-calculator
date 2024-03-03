@@ -3,8 +3,6 @@ export function removeLeadingZeros(number: string) {
 
 	const result = parseFloat(numberString);
 
-	console.log(result);
-
 	return result;
 }
 
