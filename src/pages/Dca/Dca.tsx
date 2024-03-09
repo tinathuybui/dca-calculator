@@ -8,16 +8,15 @@ import InitialInvestment from "./components/InitialInvestment";
 import NewInvestment from "./components/NewInvestment";
 import Result from "./components/Result";
 import { PARAMS } from "./constants";
-
 const initialDefault = 0;
 
 const Dca = () => {
-	// const { isDarkMode, toggleDarkMode } = useDarkMode();
-
 	const { searchParams, updateParamsValue } = useParamsValue({
 		[PARAMS.initialSharePrice]: String(initialDefault),
 		[PARAMS.initialNoOfUnits]: String(initialDefault),
 		[PARAMS.initialPurchaseAmount]: String(initialDefault),
+		[PARAMS.currentSharePrice]: String(initialDefault),
+		[PARAMS.additionalInvestment]: String(initialDefault),
 	});
 
 	const [initialSharePrice, setInitialSharePrice] = useState<number>(
@@ -30,10 +29,12 @@ const Dca = () => {
 		Number(searchParams.get(PARAMS.initialPurchaseAmount)) || initialDefault
 	);
 
-	const [currentSharePrice, setCurrentSharePrice] =
-		useState<number>(initialDefault);
-	const [additionalInvestment, setAdditionalInvestment] =
-		useState<number>(initialDefault);
+	const [currentSharePrice, setCurrentSharePrice] = useState<number>(
+		Number(searchParams.get(PARAMS.currentSharePrice)) || initialDefault
+	);
+	const [additionalInvestment, setAdditionalInvestment] = useState<number>(
+		Number(searchParams.get(PARAMS.additionalInvestment)) || initialDefault
+	);
 	const [additionalNoOfUnits, setAdditionalNoOfUnits] =
 		useState<number>(initialDefault);
 
@@ -67,6 +68,7 @@ const Dca = () => {
 				setAdditionalInvestment={setAdditionalInvestment}
 				additionalNoOfUnits={additionalNoOfUnits}
 				setAdditionalNoOfUnits={setAdditionalNoOfUnits}
+				updateParamsValue={updateParamsValue}
 			/>
 
 			<Result

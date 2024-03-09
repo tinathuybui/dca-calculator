@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Icon } from "components/General";
 import style from "pages/Dca/Dca.module.scss";
+import { PARAMS } from "pages/Dca/constants";
 import {
 	ChangeEvent,
 	Dispatch,
@@ -20,6 +21,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
+
 interface NewInvestmentProps {
 	currentSharePrice: number;
 	additionalInvestment: number;
@@ -27,6 +29,7 @@ interface NewInvestmentProps {
 	setAdditionalInvestment: Dispatch<SetStateAction<number>>;
 	additionalNoOfUnits: number;
 	setAdditionalNoOfUnits: Dispatch<SetStateAction<number>>;
+	updateParamsValue: (key: string, value: string) => void;
 }
 
 const NewInvestment: FC<NewInvestmentProps> = ({
@@ -36,8 +39,21 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 	setAdditionalInvestment,
 	additionalNoOfUnits,
 	setAdditionalNoOfUnits,
+	updateParamsValue,
 }) => {
 	const [isEditing, setIsEditing] = useState(false);
+
+	useEffect(() => {
+		if (!isEditing && currentSharePrice >= 0 && additionalNoOfUnits >= 0) {
+			setAdditionalInvestment(currentSharePrice * additionalNoOfUnits);
+		}
+	}, [
+		isEditing,
+		currentSharePrice,
+		additionalNoOfUnits,
+		additionalInvestment,
+		setAdditionalInvestment,
+	]);
 
 	useEffect(() => {
 		if (!isEditing && currentSharePrice >= 0 && additionalNoOfUnits >= 0) {
@@ -55,6 +71,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 		setAdditionalInvestment,
 		setAdditionalNoOfUnits,
 		setCurrentSharePrice,
+		updateParamsValue,
 	]);
 
 	const handleFocus = (event: { target: { select: () => void } }) => {
@@ -65,6 +82,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 		const inputValue = e.target.value;
 		setCurrentSharePrice(parseFloat(inputValue));
 		setIsEditing(false);
+		updateParamsValue(PARAMS.currentSharePrice, inputValue.toString());
 	};
 
 	const handleAdditionalNoOfUnits = (e: ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +95,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 		const inputValue = e.target.value;
 		setAdditionalInvestment(parseFloat(inputValue));
 		setIsEditing(true);
+		updateParamsValue(PARAMS.additionalInvestment, inputValue.toString());
 	};
 
 	return (
