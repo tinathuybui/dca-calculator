@@ -51,7 +51,15 @@ const Dca = () => {
 
 	return (
 		<div className={style.dca}>
-			<Header handleReset={handleReset} />
+			<Header
+				handleReset={handleReset}
+				currentSharePrice={currentSharePrice}
+				initialSharePrice={initialSharePrice}
+				initialNoOfUnits={initialNoOfUnits}
+				initialPurchaseAmount={initialPurchaseAmount}
+				additionalInvestment={additionalInvestment}
+				additionalNoOfUnits={additionalNoOfUnits}
+			/>
 
 			<InitialInvestment
 				initialSharePrice={initialSharePrice}
