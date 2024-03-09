@@ -17,6 +17,7 @@ const Dca = () => {
 		[PARAMS.initialPurchaseAmount]: String(initialDefault),
 		[PARAMS.currentSharePrice]: String(initialDefault),
 		[PARAMS.additionalInvestment]: String(initialDefault),
+		[PARAMS.additionalNoOfUnits]: String(initialDefault),
 	});
 
 	const [initialSharePrice, setInitialSharePrice] = useState<number>(
@@ -35,8 +36,9 @@ const Dca = () => {
 	const [additionalInvestment, setAdditionalInvestment] = useState<number>(
 		Number(searchParams.get(PARAMS.additionalInvestment)) || initialDefault
 	);
-	const [additionalNoOfUnits, setAdditionalNoOfUnits] =
-		useState<number>(initialDefault);
+	const [additionalNoOfUnits, setAdditionalNoOfUnits] = useState<number>(
+		Number(searchParams.get(PARAMS.additionalNoOfUnits)) || initialDefault
+	);
 
 	const handleReset = () => {
 		setInitialSharePrice(initialDefault);

@@ -1,3 +1,8 @@
 code {
 	font-family: var(--global-font-mono);
 }
+body {
+	background-image: url("/Users/buithuytien/Desktop/repos/dca-calculator/src/background/eef610ea-0e8b-440a-8a6c-7cb009a2375a.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}

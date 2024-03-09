@@ -54,14 +54,17 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 		additionalInvestment,
 		setAdditionalInvestment,
 	]);
-
 	useEffect(() => {
 		if (!isEditing && currentSharePrice >= 0 && additionalNoOfUnits >= 0) {
-			setAdditionalInvestment(currentSharePrice * additionalNoOfUnits);
+			const res = currentSharePrice * additionalNoOfUnits;
+			setAdditionalInvestment(res);
+			updateParamsValue(PARAMS.additionalInvestment, res.toString());
 		}
 
 		if (isEditing && currentSharePrice > 0) {
-			setAdditionalNoOfUnits(additionalInvestment / currentSharePrice);
+			const res = additionalInvestment / currentSharePrice;
+			setAdditionalNoOfUnits(res);
+			updateParamsValue(PARAMS.additionalNoOfUnits, res.toString());
 		}
 	}, [
 		isEditing,
@@ -89,6 +92,7 @@ const NewInvestment: FC<NewInvestmentProps> = ({
 		const inputValue = e.target.value;
 		setAdditionalNoOfUnits(parseFloat(inputValue));
 		setIsEditing(false);
+		updateParamsValue(PARAMS.additionalNoOfUnits, inputValue.toString());
 	};
 
 	const handleAdditionalInvestment = (e: ChangeEvent<HTMLInputElement>) => {

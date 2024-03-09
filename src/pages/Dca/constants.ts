@@ -3,5 +3,6 @@ export const PARAMS = {
 	initialNoOfUnits: "inou",
 	initialPurchaseAmount: "ipa",
 	currentSharePrice: "csp",
+	additionalNoOfUnits: "anu",
 	additionalInvestment: "ai",
 };
